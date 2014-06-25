@@ -11,44 +11,18 @@ namespace Assignent2Practice
         static void Main(string[] args)
         {
 
-            DateTime today = DateTime.Today; // DateTime object today has the current date
-
             Console.WriteLine("Please enter your date of birth in the following format 'yyyy-mm-dd': ");
 
             String myString = Console.ReadLine(); // Read user input
+            DateTime myDate = new DateTime();
+            DateTime now = DateTime.Today; // DateTime object today has the current dat
+            myDate = DateTime.ParseExact(myString, "yyyy-MM-dd", null);
 
-            DateTime myDateTime = new DateTime(); // Declare and create new DateTime object to store user input.
+            BirthdayCheck myBirthday = new BirthdayCheck(myDate, now);
 
-            // Parse user date of birth input from string and store in myDateTime
-            myDateTime = DateTime.ParseExact(myString, "yyyy-MM-dd", null);
-
-            // Get age by subtracting date of birth year from current year.
-            int age = today.Year - myDateTime.Year;
-            if (myDateTime > today.AddYears(-age))
-            {
-                age--;
-            }
-
-            // if date of birth is greater than current date, write error message.
-            if (myDateTime > today)
-            {
-                Console.WriteLine("Error, incorrect date of birth entered!");
-            }
-
-            // else write age of user
-            else
-            {
-                Console.WriteLine("Age: " + age);
-
-            }
-
-            // if date of birth's day and month equal today's date and month, and the date of birth's year is less than
-            // or equal to today's year, write happy birthday.
-            if (myDateTime.Day == today.Day && myDateTime.Month == today.Month && myDateTime.Year <= today.Year)
-            {
-                Console.WriteLine("Happy Birthday!");
-            }
-
+            myBirthday.setAge(now, myDate);
+            myBirthday.checkDOB(now, myDate);
+          
             Console.ReadKey();
     
             decimal minBalance = 0.00m; // variable minBalance declared and initialized
@@ -72,7 +46,7 @@ namespace Assignent2Practice
 
             Console.ReadKey();
 
-            // call modifyMinBalance method on minBalance to change value of minBalance by passing value
+            // call modifyMinBalance method on minBalance to demonstrate changing value of minBalance by passing value
             // by reference.
             modifyMinBalance(ref minBalance);
 
